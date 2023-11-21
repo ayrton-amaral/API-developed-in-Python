@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 import json
 from controllers.user_controller import create_user, login_user, fetch_users
 from helpers.token_validation import validate_token
+from helpers.error_message import *
 
 user = Blueprint("user", __name__)
 
@@ -57,9 +58,9 @@ def fetch():
         token = validate_token()
 
         if token == 400:
-            return jsonify({'error': 'Token is missing in the request.'}), 400
+            return jsonify(CONST_MISSING_TOKEN_ERROR), 400
         if token == 401:
-            return jsonify({'error': 'Invalid token authentication.'}), 401
+            return jsonify(CONST_INVALID_TOKEN_ERROR), 401
 
         return jsonify({'users': fetch_users()})
     except Exception:

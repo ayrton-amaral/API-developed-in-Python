@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 import json
 from controllers.verb_controller import get_verb, favorite_verb
 from helpers.token_validation import validate_token
+from helpers.error_message import *
 
 verb = Blueprint("verb", __name__)
 
@@ -11,13 +12,13 @@ def getVerb():
         token = validate_token()
 
         if token == 400:
-            return jsonify({'error': 'Token is missing in the request, please try again'}), 400
+            return jsonify(CONST_MISSING_TOKEN_ERROR), 400
         if token == 401:
-            return jsonify({'error': 'Invalid token authentication, please login again'}), 401
+            return jsonify(CONST_INVALID_TOKEN_ERROR), 401
             
         data = json.loads(request.data)
         if 'verb' not in data:
-            return jsonify({'error': 'Verb is needed in the request.'}), 400
+            return jsonify(CONST_VERB_NEEDED_ERROR), 400
 
         response_data = get_verb(data).json
 
@@ -31,14 +32,14 @@ def favoriteVerb():
         token = validate_token()
 
         if token == 400:
-            return jsonify({'error': 'Token is missing in the request, please try again'}), 400
+            return jsonify(CONST_MISSING_TOKEN_ERROR), token
         if token == 401:
-            return jsonify({'error': 'Invalid token authentication, please login again'}), 401
+            return jsonify(CONST_INVALID_TOKEN_ERROR), token
             
         data = json.loads(request.data)
 
         if 'verb' not in data:
-            return jsonify({'error': 'Verb is needed in the request.'}), 400
+            return jsonify(CONST_VERB_NEEDED_ERROR), 400
 
         favorite_verb_result = favorite_verb(data, token)
 
