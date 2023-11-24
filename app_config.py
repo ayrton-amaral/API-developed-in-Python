@@ -6,8 +6,6 @@
 
 CONST_MONGO_URL = "mongodb+srv://ayrtonsenna:oPyTDlAEOAvWgmbi@cluster0.wpcewfw.mongodb.net/?retryWrites=true&w=majority"
 CONST_DATABASE_NAME= "test"
-# ayrtonsenna
-# oPyTDlAEOAvWgmbi
 
 CONST_USER_COLLECTION = "users"
 CONST_VERB_COLLECTION = "verbs"

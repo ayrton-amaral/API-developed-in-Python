@@ -51,3 +51,33 @@ def favorite_verb(userInput, tokenUser):
 
     except Exception as err:
         print("Error on trying to save verb. ", err)
+
+
+def selectFavorite(favoriteUid, tokenUser):
+    user_id = tokenUser.get('uid', None)
+
+    collectionVerb = database.dataBase[config.CONST_VERB_COLLECTION]
+    selectedVerb = collectionVerb.find_one({'owner': user_id, '_id': ObjectId(favoriteUid)})
+
+    if not selectedVerb:
+        return None
+
+    response = getVerbFromApi(selectedVerb["verb"])
+
+    return response
+
+def selectAllFavorites(tokenUser):
+    user_id = tokenUser.get('uid', None)
+
+    collectionVerb = database.dataBase[config.CONST_VERB_COLLECTION]
+    favoriteVerbs = collectionVerb.find({'owner': user_id})
+
+    verbs = []
+
+    for verb in favoriteVerbs:
+        current_verb = {}
+        current_verb["_id"] = str(verb['_id'])
+        current_verb["verb"] = verb['verb']
+        verbs.append(current_verb)
+
+    return verbs
