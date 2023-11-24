@@ -26,6 +26,7 @@ def getVerb():
     except Exception:
         return jsonify({'error': 'Something happened when trying to get the verb.'}), 500
 
+
 @verb.route("/v0/verbs/favorites/", methods=["POST"])
 def favoriteVerb():
     try:
@@ -44,7 +45,6 @@ def favoriteVerb():
         favorite_verb_result = favorite_verb(data, token)
 
         return favorite_verb_result
-
     except Exception as error:
         print(error)
         return jsonify({'error': 'Something happened when trying to favorite the verb.'}), 500

@@ -6,7 +6,6 @@ import jwt
 from datetime import datetime, timedelta
 from flask import jsonify
 
-
 #pip install bcrypt
 #pip install pyjwt
 
@@ -30,8 +29,6 @@ def create_user(userInformation):
         created_user = collection.insert_one(new_user.__dict__)
 
         return created_user
-
-
     except Exception as err:
         print("Error on creating user: ", err)
 

@@ -52,6 +52,7 @@ def login():
     except Exception:
         return jsonify({'error': 'Something happened when trying to login.'}), 500
 
+
 @user.route("/v0/users/", methods=["GET"])
 def fetch():
     try:
