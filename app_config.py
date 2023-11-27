@@ -4,7 +4,10 @@
 # CONST_MONGO_URL = "mongodb+srv://landeirob:DQIeF2UPMRkexpze@cluster0.rnfjvlw.mongodb.net/?retryWrites=true&w=majority"
 # CONST_DATABASE_NAME= "test"
 
-CONST_MONGO_URL = "mongodb+srv://ayrtonsenna:oPyTDlAEOAvWgmbi@cluster0.wpcewfw.mongodb.net/?retryWrites=true&w=majority"
+# CONST_MONGO_URL = "mongodb+srv://ayrtonsenna:oPyTDlAEOAvWgmbi@cluster0.wpcewfw.mongodb.net/?retryWrites=true&w=majority"
+# CONST_DATABASE_NAME= "test"
+
+CONST_MONGO_URL = "mongodb+srv://kasiviero:wIwU8bDm6mjnJYL7@cluster0.n8d7zvw.mongodb.net/?retryWrites=true&w=majority"
 CONST_DATABASE_NAME= "test"
 
 CONST_USER_COLLECTION = "users"
