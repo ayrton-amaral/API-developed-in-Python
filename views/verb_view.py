@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 import json
-from controllers.verb_controller import get_verb, favorite_verb, selectFavorite, selectAllFavorites
+from controllers.verb_controller import get_verb, favorite_verb, selectFavorite, selectAllFavorites, delete_favorite
 from helpers.token_validation import validate_token
 from helpers.error_message import *
 from bson.objectid import ObjectId
@@ -92,3 +92,29 @@ def getAllFavoriteVerbs():
     except Exception as error:
         print(error)
         return jsonify({'error': 'Something happened when trying to find favorite verb.'}), 500
+    
+@verb.route("/v0/verbs/favorites/<favoriteUid>/", methods=["DELETE"])
+def delete_favorite_verb(favoriteUid):
+    try:
+        token = validate_token()
+
+        if token == 400:
+            return jsonify(CONST_MISSING_TOKEN_ERROR), token
+        if token == 401:
+            return jsonify(CONST_INVALID_TOKEN_ERROR), token
+        
+        try:
+            ObjectId(favoriteUid)
+        except Exception:
+            return jsonify({'error': 'This ObjectId format is not valid.'}), 400
+
+        deleted_favorite = delete_favorite(favoriteUid, token)
+        
+        if deleted_favorite is None:
+            return jsonify({'error': 'This verb is not favorited.'}), 400
+
+        return jsonify({'verbs_affected': deleted_favorite.deleted_count}), 200
+    except Exception as error:
+        print(error)
+        return jsonify({'error': 'Something happened when trying to find favorite verb.'}), 500
+    

@@ -8,7 +8,7 @@
 # CONST_DATABASE_NAME= "test"
 
 CONST_MONGO_URL = "mongodb+srv://kasiviero:wIwU8bDm6mjnJYL7@cluster0.n8d7zvw.mongodb.net/?retryWrites=true&w=majority"
-CONST_DATABASE_NAME= "test"
+CONST_DATABASE_NAME= "TEST"
 
 CONST_USER_COLLECTION = "users"
 CONST_VERB_COLLECTION = "verbs"

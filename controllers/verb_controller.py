@@ -81,3 +81,18 @@ def selectAllFavorites(tokenUser):
         verbs.append(current_verb)
 
     return verbs
+
+def delete_favorite(favoriteUid, tokenUser):
+    user_id = tokenUser.get('uid', None)
+
+    collectionVerb = database.dataBase[config.CONST_VERB_COLLECTION]
+
+    selectedVerb = collectionVerb.find_one({'owner': user_id, '_id': ObjectId(favoriteUid)})
+
+    if not selectedVerb:
+        return None
+
+    response = collectionVerb.delete_one(selectedVerb)
+
+
+    return response
