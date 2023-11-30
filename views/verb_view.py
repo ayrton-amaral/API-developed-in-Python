@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 import json
-from controllers.verb_controller import get_verb, favorite_verb, selectFavorite, selectAllFavorites, delete_favorite
+from controllers.verb_controller import get_verb, get_random_verbs, favorite_verb, selectFavorite, selectAllFavorites, delete_favorite
 from helpers.token_validation import validate_token
 from helpers.error_message import *
 from bson.objectid import ObjectId
@@ -27,6 +27,26 @@ def getVerb():
     except Exception:
         return jsonify({'error': 'Something happened when trying to get the verb.'}), 500
 
+@verb.route("/v0/verbs/random/", methods=["GET"])
+def get_random_verbs():
+    try:
+        token = validate_token()
+
+        if token == 400:
+            return jsonify(CONST_MISSING_TOKEN_ERROR), 400
+        if token == 401:
+            return jsonify(CONST_INVALID_TOKEN_ERROR), 401
+            
+        data = json.loads(request.data)
+
+        if 'quantity' not in data:
+            return jsonify(CONST_QUANTITY_NEEDED_ERROR), 400
+
+        response_data = get_random_verbs(data).json
+
+        return jsonify(response_data)
+    except Exception:
+        return jsonify({'error': 'Something happened when trying to get the verb.'}), 500
 
 @verb.route("/v0/verbs/favorites/", methods=["POST"])
 def favoriteVerb():

@@ -3,7 +3,7 @@ from database.__init__ import database
 import app_config as config
 from flask import jsonify
 from bson.objectid import ObjectId
-from helpers.external_api import getVerbFromApi
+from helpers.external_api import getVerbFromApi, get_random_verbs_from_api
 
 def get_verb(userInput):
     try:
@@ -17,6 +17,21 @@ def get_verb(userInput):
             return jsonify({"error": response.json()["errorMessage"]})
     except Exception as err:
         print("Error on trying to get the verb. ", err)
+
+
+def get_random_verbs(userInput):
+    try:
+        quantity = userInput["quantity"]
+
+        response = get_random_verbs_from_api(quantity)
+
+        if response.status_code == 200:
+            return jsonify({"verbs": response.json()})
+        else:
+            return jsonify({"error": response.json()["errorMessage"]})
+    except Exception as err:
+        print("Error on trying to get the verb. ", err)
+
 
 def favorite_verb(userInput, tokenUser):
     try:
