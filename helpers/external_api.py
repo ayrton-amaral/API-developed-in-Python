@@ -8,5 +8,5 @@ CONST_DICT_TOKEN = {'token':'278ef2169b144e879aec4f48383dce28e654a009cacf46f8b6c
 def getVerbFromApi(verb):
     return requests.get(CONST_API_URL_VERB, headers=CONST_DICT_TOKEN, json={'verb':verb})
 
-def get_random_verbs_from_api(quantity):
+def get_random_from_api(quantity):
     return requests.get(CONST_API_URL_VERB_RANDOM, headers=CONST_DICT_TOKEN, json={'quantity':quantity})

@@ -28,7 +28,7 @@ def getVerb():
         return jsonify({'error': 'Something happened when trying to get the verb.'}), 500
 
 @verb.route("/v0/verbs/random/", methods=["GET"])
-def get_random_verbs():
+def get_random():
     try:
         token = validate_token()
 
@@ -42,9 +42,11 @@ def get_random_verbs():
         if 'quantity' not in data:
             return jsonify(CONST_QUANTITY_NEEDED_ERROR), 400
 
-        response_data = get_random_verbs(data).json
-
-        return jsonify(response_data)
+        #response_data = get_random_verbs(data).json
+        #return jsonify(response_data)
+    
+        response_data = get_random_verbs(data)
+        return response_data
     except Exception:
         return jsonify({'error': 'Something happened when trying to get the verb.'}), 500
 
