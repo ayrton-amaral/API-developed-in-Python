@@ -1,5 +1,5 @@
 class Verb:
-    def __init__(self):
-        self.owner = ""
-        self.verb = ""
+    def __init__(self, owner, verb):
+        self.owner = owner
+        self.verb = verb
        

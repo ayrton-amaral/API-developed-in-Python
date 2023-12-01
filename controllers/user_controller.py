@@ -14,12 +14,12 @@ def generate_hashed_password(password):
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed_password
 
-def create_user(userInformation):
+def create_user(user_information):
     try:
         new_user  = User()
-        new_user.name = userInformation["name"]
-        new_user.email = userInformation["email"]
-        new_user.password = generate_hashed_password(userInformation["password"])
+        new_user.name = user_information["name"]
+        new_user.email = user_information["email"]
+        new_user.password = generate_hashed_password(user_information["password"])
 
         collection = database.dataBase[config.CONST_USER_COLLECTION]
 
@@ -32,10 +32,10 @@ def create_user(userInformation):
     except Exception as err:
         print("Error on creating user: ", err)
 
-def login_user(userInformation):
+def login_user(user_information):
     try:
-        email = userInformation["email"]
-        password = userInformation["password"].encode('utf-8')
+        email = user_information["email"]
+        password = user_information["password"].encode('utf-8')
 
         collection = database.dataBase[config.CONST_USER_COLLECTION]
 
