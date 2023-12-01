@@ -3,13 +3,13 @@ from database.__init__ import database
 import app_config as config
 from flask import jsonify
 from bson.objectid import ObjectId
-from helpers.external_api import getVerbFromApi, get_random_from_api
+from helpers.external_api import get_verb_from_api, get_random_from_api
 
 def get_verb(userInput):
     try:
         verb = userInput["verb"]
 
-        response = getVerbFromApi(verb)
+        response = get_verb_from_api(verb)
 
         if response.status_code == 200:
             return jsonify({"verb": response.json()})
@@ -38,7 +38,7 @@ def favorite_verb(userInput, tokenUser):
         verb = userInput["verb"]
         user_id = tokenUser.get('uid', None)
 
-        response = getVerbFromApi(verb)
+        response = get_verb_from_api(verb)
 
         if response.status_code == 200:
             collection = database.dataBase[config.CONST_USER_COLLECTION]
@@ -77,7 +77,7 @@ def selectFavorite(favoriteUid, tokenUser):
     if not selectedVerb:
         return None
 
-    response = getVerbFromApi(selectedVerb["verb"])
+    response = get_verb_from_api(selectedVerb["verb"])
 
     return response
 
