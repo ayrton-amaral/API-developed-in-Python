@@ -2,9 +2,9 @@
 
 ## Overview
 
-The French Grammar API is a collaborative final project developed during the 'Scripting Language' course at Collège LaSalle. 
-
 The API is designed to retrieve data for a french grammar mobile application on iOS.
+
+The French Grammar API is a collaborative final project developed during the 'Scripting Language' course at Collège LaSalle. 
 
 ## Contributors
 
